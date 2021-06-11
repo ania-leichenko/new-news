@@ -28,7 +28,7 @@ export default function MenuAppBar() {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <FormGroup></FormGroup>
       <AppBar position="static">
         <Toolbar>
