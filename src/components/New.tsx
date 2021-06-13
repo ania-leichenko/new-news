@@ -58,7 +58,7 @@ export default function New({ item }: IProps) {
     <Card className={classes.hot}>
       <CardMedia
         className={classes.media}
-        image="/image/polaroid.jpg"
+        image={item.image}
         title="Paella dish"
       />
       <CardContent>
@@ -84,26 +84,7 @@ export default function New({ item }: IProps) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            Ищете себе такую камеру, которая не только хорошо снимает, но и с
-            интересной историей? Тогда предлагаем взглянуть на Polaroid Now
-            Keith Haring Edition — результат коллаборации Фонда Кита Харинга и
-            Polaroid.
-          </Typography>
-          <Typography paragraph>
-            Камера мгновенной печати впитала в себя настроения Нью-Йорка 80-х
-            годов, когда весь мир наблюдал за творчеством Кита Харинга.
-            Знаменитые иллюстрации художника удачно перекочевали на небольшой
-            корпус фотоаппарата, представленный в красной расцветке. Кроме того,
-            этот же паттерн прослеживается и на картриджах для камеры.
-          </Typography>
-          <Typography paragraph>
-            Но Polaroid Now может похвастаться не только стильным дизайном:
-            точно настроенная вспышка и двухлинзовая автофокусировка — как раз
-            то, что нужно для резких кадров.
-          </Typography>
-          <Typography>
-            Обойдется такая камера в $ 120, или же $ 170 за стартовый набор, в
-            который вошли фотоаппарат и 3 набора картриджей.
+            {item.paragraphs}
           </Typography>
         </CardContent>
       </Collapse>
