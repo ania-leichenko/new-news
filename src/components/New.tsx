@@ -35,7 +35,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function New() {
+interface INew {
+  id: string | number;
+  h1: string;
+  paragraphs: string;
+  image: string;
+}
+
+interface IProps {
+  item: INew;
+}
+
+export default function New({ item }: IProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,8 +63,7 @@ export default function New() {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Keith Haring × Polaroid: когда все, что вы фотографируете, становится
-          искусством
+          {item.h1}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

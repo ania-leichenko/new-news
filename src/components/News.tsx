@@ -26,7 +26,7 @@ interface IProps {
 
 export default function News({ news = [] }: IProps) {
   const classes = useStyles();
-  const newsList = news.map((item) => <New key={item.id} />);
+  const newsList = news.map((item) => <New key={item.id} item={item} />);
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
