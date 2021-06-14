@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {NewComponentNew} from "../types";
 
 const useStyles = makeStyles((theme) => ({
   hot: {
@@ -35,18 +36,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface INew {
-  id: string | number;
-  h1: string;
-  paragraphs: string;
-  image: string;
+interface NewComponentProps {
+  item: NewComponentNew;
 }
 
-interface IProps {
-  item: INew;
-}
-
-export default function New({ item }: IProps) {
+export default function New({ item }: NewComponentProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 

@@ -2,6 +2,7 @@ import New from "./New";
 import Grid from "@material-ui/core/Grid";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import {NewComponentNew} from "../types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,17 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface INew {
-  id: string | number;
-  h1: string;
-  paragraphs: string;
-  image: string;
-}
-interface IProps {
-  news: INew[];
+interface NewComponentProps {
+  news: NewComponentNew[];
 }
 
-export default function News({ news = [] }: IProps) {
+export default function News({ news = [] }: NewComponentProps) {
   const classes = useStyles();
   const newsList = news.map((item) => <New key={item.id} item={item} />);
   return (
