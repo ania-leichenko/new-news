@@ -1,9 +1,22 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
+import News from "../components/News";
+import Filter from "components/Filter";
+import { allNews, hotNews } from "../api/news";
 
 export default function Home() {
+  const [filter, setFilter] = useState("all");
+  const [news, setNews] = useState(allNews);
+
+  useEffect(() => {
+    if (filter === "all") {
+      setNews(allNews);
+    } else {
+      setNews(hotNews);
+    }
+  }, [filter]);
+
   return (
     <div>
       <Head>
@@ -13,14 +26,8 @@ export default function Home() {
       </Head>
       <Header />
       <main>
-        <Box m={1}>
-          <Button size="medium" variant="contained" color="primary">
-            Small
-          </Button>
-          <Button size="medium" variant="contained" color="primary">
-            Medium
-          </Button>
-        </Box>
+        <Filter filter={filter} setFilter={setFilter} />
+        <News news={news} />
       </main>
     </div>
   );
