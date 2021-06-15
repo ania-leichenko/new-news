@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import {NewComponentNew} from "../types";
+import {NewsItem} from "../pages/types/news-item";
 
 const useStyles = makeStyles((theme) => ({
   hot: {
@@ -36,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface NewComponentProps {
-  item: NewComponentNew;
+interface NewsItemComponentProps {
+  item: NewsItem;
 }
 
-export default function New({ item }: NewComponentProps) {
+export default function NewsItemComponent({ item }: NewsItemComponentProps) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -57,7 +57,7 @@ export default function New({ item }: NewComponentProps) {
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {item.h1}
+          {item.title}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -78,7 +78,7 @@ export default function New({ item }: NewComponentProps) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            {item.paragraphs}
+            {item.description}
           </Typography>
         </CardContent>
       </Collapse>
