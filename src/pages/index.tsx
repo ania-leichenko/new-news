@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
-import News from "../components/News";
+import { NewsComponent } from "../components/NewsComponent";
 import Filter from "components/Filter";
-import { allNews, hotNews } from "../api/news";
 
 export default function Home() {
   const [filter, setFilter] = useState("all");
-  const [news, setNews] = useState(allNews);
+  const [tags, setTags] = useState(["hot"]);
 
   useEffect(() => {
-    if (filter === "all") {
-      setNews(allNews);
-    } else {
-      setNews(hotNews);
-    }
+    const result = filter === "all" ? [] : ["hot"];
+
+    setTags(result);
   }, [filter]);
 
   return (
@@ -27,7 +24,7 @@ export default function Home() {
       <Header />
       <main>
         <Filter filter={filter} setFilter={setFilter} />
-        <News news={news} />
+        <NewsComponent tags={tags} />
       </main>
     </div>
   );
