@@ -2,12 +2,12 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 
-interface IProps {
+interface NewComponentsProps {
   filter: string;
   setFilter: Function;
 }
 
-export default function Filter({ filter, setFilter }: IProps) {
+export default function Filter({ filter, setFilter }: NewComponentsProps) {
   function allClickHandler() {
     setFilter("all");
   }
