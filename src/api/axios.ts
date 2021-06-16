@@ -6,4 +6,4 @@ axios.defaults.paramsSerializer = (params) => {
   return Qs.stringify(params, { arrayFormat: "repeat" });
 };
 
-export const client = axios;;
+export const client = axios;
