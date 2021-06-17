@@ -38,5 +38,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "src/components/Cap.tsx"  ]
 }

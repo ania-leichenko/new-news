@@ -3,6 +3,7 @@ import Head from "next/head";
 import Header from "../components/Header";
 import { NewsComponent } from "../components/NewsComponent";
 import Filter from "components/Filter";
+import header from "components/header";
 
 export default function Home() {
   const [filter, setFilter] = useState("all");
@@ -22,6 +23,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+      <header />
       <main>
         <Filter filter={filter} setFilter={setFilter} />
         <NewsComponent tags={tags} />
