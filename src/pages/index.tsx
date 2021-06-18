@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "components/Header";
-import Cap from "components/Cap";
 import { NewsComponent } from "components/NewsComponent";
 import Filter from "components/Filter";
 
@@ -23,7 +22,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Cap />
       <main>
         <Filter filter={filter} setFilter={setFilter} />
         <NewsComponent tags={tags} />

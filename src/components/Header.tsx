@@ -7,7 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/client";
+import styles from "./header.module.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,7 @@ export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const [session, loading] = useSession();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -69,7 +71,58 @@ export default function MenuAppBar() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>
-                  <Link href="/sign-in">Sign In</Link>
+                  <header>
+      <div className={styles.signedInStatus}>
+        <p
+          className={`nojs-show ${
+            !session && loading ? styles.loading : styles.loaded
+          }`}
+        >
+          {!session && (
+            <>
+              <span className={styles.notSignedInText}>
+                You are not signed in
+              </span>
+              <a
+                href={`/api/auth/signin`}
+                className={styles.buttonPrimary}
+                onClick={(e) => {
+                  e.preventDefault();
+                  signIn();
+                }}
+              >
+                Sign in
+              </a>
+            </>
+          )}
+          {session && (
+            <>
+              {session.user.image && (
+                <span
+                  style={{ backgroundImage: `url(${session.user.image})` }}
+                  className={styles.avatar}
+                />
+              )}
+              <span className={styles.signedInText}>
+                <small>Signed in as</small>
+                <br />
+                <strong>{session.user.email || session.user.name}</strong>
+              </span>
+              <a
+                href={`/api/auth/signout`}
+                className={styles.button}
+                onClick={(e) => {
+                  e.preventDefault();
+                  signOut();
+                }}
+              >
+                Sign out
+              </a>
+            </>
+          )}
+        </p>
+      </div>
+    </header>
                 </MenuItem>
               </Menu>
             </div>
