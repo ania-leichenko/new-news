@@ -1,5 +1,17 @@
+import { Provider } from "next-auth/client";
+
 function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <Provider
+      options={{
+        clientMaxAge: 0,
+        keepAlive: 0,
+      }}
+      session={pageProps.session}
+    >
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
 
 const getInitialProps = async ({ Component, ctx }) => {
@@ -12,4 +24,4 @@ const getInitialProps = async ({ Component, ctx }) => {
 
 App.getInitialProps = getInitialProps;
 
-export default App
+export default App;
