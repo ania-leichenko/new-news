@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "pages/api/Header";
+import Header from "../components/Hearder/Header";
 import { NewsComponent } from "components/NewsComponent";
 import Filter from "components/Filter";
 

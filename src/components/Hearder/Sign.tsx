@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import styles from "./header.module.css";
 
 
-export default function Cap() {
+export default function Sign() {
   const [session, loading] = useSession();
 
   return (
