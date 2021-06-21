@@ -1,4 +1,4 @@
-import { NewsItem } from "pages/types";
+import { NewsItem } from "types";
 import { useState, useEffect } from "react";
 import { client } from "api/axios";
 
