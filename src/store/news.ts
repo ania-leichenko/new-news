@@ -1,4 +1,4 @@
-import { NewsItem } from "pages/types";
+import { NewsItem } from "types";
 
 export const NewsData: NewsItem[] = [
   {

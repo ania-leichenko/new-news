@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "../components/Header";
-import { NewsComponent } from "../components/NewsComponent";
+import Header from "../components/Hearder/Header";
+import { NewsComponent } from "components/NewsComponent";
 import Filter from "components/Filter";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
 
     setTags(result);
   }, [filter]);
-
+  
   return (
     <div>
       <Head>

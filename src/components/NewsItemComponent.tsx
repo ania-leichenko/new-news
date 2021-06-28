@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import {NewsItem} from "../pages/types/news-item";
+import {NewsItem} from "../types/news-item";
 
 const useStyles = makeStyles((theme) => ({
   hot: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "56.25%", 
   },
   expand: {
     transform: "rotate(0deg)",
