@@ -21,6 +21,7 @@
     "target": "esnext",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "*": [
         "src/*",
         "pages/*"

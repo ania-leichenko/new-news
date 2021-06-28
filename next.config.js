@@ -2,6 +2,7 @@ const path = require('path');
 const withOffline = require('next-offline')
 
 const alias = {
+  '@/': path.join(__dirname, 'src/'),
   'api': path.join(__dirname, 'src/api'),
   'components': path.join(__dirname, 'src/components'),
   'config': path.join(__dirname, 'src/config'),

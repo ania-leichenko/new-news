@@ -10,6 +10,7 @@ export const NewsData: NewsItem[] = [
         Polaroid.`,
     image: "/image/polaroid.jpg",
     tags: ["hot", "camera", "photo"],
+    comments: []
   },
   {
     id: "4e7c5bb4-3ffe-48a4-bf4e-073e2abae99f",
@@ -20,6 +21,7 @@ export const NewsData: NewsItem[] = [
         Polaroid.`,
     image: "/image/polaroid.jpg",
     tags: ["hot", "camera", "photo"],
+    comments: []
   },
   {
     id: "8389d37f-ed62-4fbe-987e-5446aea68f14",
@@ -30,5 +32,6 @@ export const NewsData: NewsItem[] = [
         Polaroid.`,
     image: "/image/polaroid.jpg",
     tags: ["camera", "photo"],
+    comments: []
   },
 ];
