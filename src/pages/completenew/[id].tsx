@@ -4,8 +4,27 @@ import Header from "@/components/Hearder/Header";
 import { useRouter } from "next/router";
 import { client } from "api/axios";
 import { NewsItem } from "@/types";
+import Input from "@material-ui/core/Input";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+    main: {
+    textAlign: "center",
+  },
+  description: {
+    fontSize: "20px",
+  },
+  comments: {
+    width: "600px",
+  },
+  footer: {
+    textAlign: "center",
+    marginTop:  "50px",
+  },
+}));
 
 export default function Home() {
+  const classes = useStyles();
   const router = useRouter();
   let id = router.query.id;
   let [item, setItem] = useState<NewsItem>();
@@ -24,12 +43,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main>
-        <img src={item?.image}/>
-        <p>{item?.title}</p>
-        <p>{item?.description}</p>
-        <p>{item?.comments}</p>
+      <main className={classes.main}>
+        <img src={item?.image} />
+        <h1>{item?.title}</h1>
+        <div className={classes.description}>
+          <p>{item?.description}</p>
+        </div>
       </main>
+      <footer className={classes.footer}>
+        <Input className={classes.comments} placeholder="Коментарии" />
+      </footer>
     </div>
   );
 }
