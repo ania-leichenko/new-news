@@ -21,9 +21,8 @@ export default function LayoutTextFields() {
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [tags, setTags] = useState("");
-  function hotClickHandler() {
-    console.log(title, description, tags);
-    client.post("/api/createnew?test=true", {
+  function clickHandler() {
+    client.post("/api/createnew", {
       title, description, tags,
     }).catch(() => {});
   }
@@ -73,7 +72,7 @@ export default function LayoutTextFields() {
             setTags(e.target.value);
           }}
         />
-        <Button variant="contained" color="primary" onClick={hotClickHandler}>
+        <Button variant="contained" color="primary" onClick={clickHandler}>
           Опубликовать
         </Button>
       </div>

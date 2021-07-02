@@ -14,6 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(403).json({ error: "403" });
     return;
   }
+   
   const item = {
     title: req.body.title,
     description: req.body.description,
@@ -21,8 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     tags: req.body.tags.split(','),
     comments: [],
   };
-  console.log(req.query);
-  console.log(req.body);
+
   db.news.save(item);
   res.status(200).json({});
 };
