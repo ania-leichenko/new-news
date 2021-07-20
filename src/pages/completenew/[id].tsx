@@ -1,25 +1,29 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "@/components/Hearder/Header";
+import Header from "@/components/Header/Header";
 import { useRouter } from "next/router";
 import { client } from "api/axios";
 import { NewsItem } from "@/types";
-import Input from "@material-ui/core/Input";
 import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
-const useStyles = makeStyles((theme) => ({
-    main: {
+const useStyles = makeStyles(() => ({
+  main: {
     textAlign: "center",
   },
   description: {
     fontSize: "20px",
   },
-  comments: {
-    width: "600px",
-  },
   footer: {
     textAlign: "center",
-    marginTop:  "50px",
+    marginTop: "50px",
+  },
+  add: {
+    marginLeft: "8px",
+  },
+  comment: {
+    width: "500px",
   },
 }));
 
@@ -28,6 +32,12 @@ export default function Home() {
   const router = useRouter();
   let id = router.query.id;
   let [item, setItem] = useState<NewsItem>();
+  let [comment, setComment] = useState("");
+  function clickHandler() {
+    client.post("/api/comment", {
+      comment, id,
+    }).catch(() => {});
+  }
 
   useEffect(() => {
     client.get(`/api/completenew?id=${id}`).then((result) => {
@@ -51,7 +61,16 @@ export default function Home() {
         </div>
       </main>
       <footer className={classes.footer}>
-        <Input className={classes.comments} placeholder="Коментарии" />
+        <TextField
+          className={classes.comment}
+          placeholder="Коментарии"
+          onChange={function (e) {
+            setComment(e.target.value);
+          }}
+        />
+        <Button className={classes.add} variant="contained" color="primary" onClick={clickHandler}>
+          Добавить
+        </Button>
       </footer>
     </div>
   );

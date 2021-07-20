@@ -14,15 +14,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(403).json({ error: "403" });
     return;
   }
-   
-  const item = {
+
+  db.news.save({
     title: req.body.title,
     description: req.body.description,
     image: "/image/polaroid.jpg",
-    tags: req.body.tags.split(','),
+    tags: req.body.tags.split(","),
     comments: [],
-  };
-
-  db.news.save(item);
+  });
   res.status(200).json({});
 };

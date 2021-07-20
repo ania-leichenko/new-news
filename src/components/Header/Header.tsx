@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import Sign from "components/Hearder/Sign";
+import Sign from "@/components/Header/Sign";
 import { client } from "api/axios";
 
 const useStyles = makeStyles((theme) => ({
