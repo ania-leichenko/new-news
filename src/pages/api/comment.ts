@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "db";
-import { getSession } from "next-auth/client";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const item = db.news.findOne({ _id: req.body.id });

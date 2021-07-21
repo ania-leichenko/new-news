@@ -34,9 +34,12 @@ export default function Home() {
   let [item, setItem] = useState<NewsItem>();
   let [comment, setComment] = useState("");
   function clickHandler() {
-    client.post("/api/comment", {
-      comment, id,
-    }).catch(() => {});
+    client
+      .post("/api/comment", {
+        comment,
+        id,
+      })
+      .catch(() => {});
   }
 
   useEffect(() => {
@@ -53,25 +56,35 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className={classes.main}>
-        <img src={item?.image} />
-        <h1>{item?.title}</h1>
-        <div className={classes.description}>
-          <p>{item?.description}</p>
-        </div>
-      </main>
-      <footer className={classes.footer}>
-        <TextField
-          className={classes.comment}
-          placeholder="Коментарии"
-          onChange={function (e) {
-            setComment(e.target.value);
-          }}
-        />
-        <Button className={classes.add} variant="contained" color="primary" onClick={clickHandler}>
-          Добавить
-        </Button>
-      </footer>
+      {item ? (
+        <main className={classes.main}>
+          <img src={item?.image} />
+          <h1>{item?.title}</h1>
+          <div className={classes.description}>
+            <p>{item?.description}</p>
+          </div>
+
+          <footer className={classes.footer}>
+            <TextField
+              className={classes.comment}
+              placeholder="Коментарии"
+              onChange={function (e) {
+                setComment(e.target.value);
+              }}
+            />
+            <Button
+              className={classes.add}
+              variant="contained"
+              color="primary"
+              onClick={clickHandler}
+            >
+              Добавить
+            </Button>
+          </footer>
+        </main>
+      ) : (
+        <main className={classes.main}>Новость не найдена</main>
+      )}
     </div>
   );
 }
