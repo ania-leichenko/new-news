@@ -20,7 +20,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     description: req.body.description,
     image: "/image/polaroid.jpg",
     tags: req.body.tags.split(","),
-    comments: [],
   });
   res.status(200).json({});
 };
