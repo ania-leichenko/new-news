@@ -33,14 +33,20 @@ export default function Home() {
   let id = router.query.id;
   let [item, setItem] = useState<NewsItem>();
   let [comment, setComment] = useState("");
+
   function clickHandler() {
     client
-      .post("/api/comment", {
+      .post("/api/comments", {
         comment,
         id,
       })
       .catch(() => {});
   }
+  const value = item?.comments.map((comment) => (
+    <li key={comment._id}>
+      {comment.value} {comment.userEmail}
+    </li>
+  ));
 
   useEffect(() => {
     client.get(`/api/completenew?id=${id}`).then((result) => {
@@ -80,6 +86,7 @@ export default function Home() {
             >
               Добавить
             </Button>
+            <ul>{value}</ul>
           </footer>
         </main>
       ) : (
