@@ -7,8 +7,14 @@ import { NewsItem } from "@/types";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import CardHeader from '@material-ui/core/CardHeader';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(() => ({
+  root: {
+    maxWidth: 345,
+    textAlign: "center"
+  },
   main: {
     textAlign: "center",
   },
@@ -43,11 +49,16 @@ export default function Home() {
       .catch(() => {});
   }
   const value = item?.comments.map((comment) => (
-    <li key={comment._id}>
-      {comment.value} {comment.userEmail}
-    </li>
+    <p key={comment._id}>
+      {comment.value}
+    </p>
   ));
-
+  const userEmail = item?.comments.map((comment) => (
+    <p key={comment._id}>
+      {comment.userEmail}
+    </p>
+  ));
+ 
   useEffect(() => {
     client.get(`/api/completenew?id=${id}`).then((result) => {
       setItem(result.data);
@@ -86,7 +97,15 @@ export default function Home() {
             >
               Добавить
             </Button>
-            <ul>{value}</ul>
+              <CardHeader className={classes.root}
+              avatar={
+                <Avatar aria-label="recipe">
+                  P
+                </Avatar>
+              }
+              title={userEmail}
+              subheader={value}
+            />
           </footer>
         </main>
       ) : (
