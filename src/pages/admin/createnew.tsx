@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Form from "./completenew/form"; 
+import Form from "../completenew/form"; 
 
 const useStyles = makeStyles(() => ({
   root: {

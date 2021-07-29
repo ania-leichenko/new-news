@@ -1,11 +1,9 @@
-import { IconButtonProps } from "@material-ui/core";
-
 export interface Comment {
   userEmail: string;
   value: string;
   articleId: string;
   _id: string;
-  userImage: IconButtonProps;
+  userImage: string;
 }
 
 

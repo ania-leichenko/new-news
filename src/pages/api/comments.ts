@@ -15,6 +15,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       userImage: session.user.image,
     }) 
   }
-  console.log(session.user.image);
   res.status(200).json({});
 };

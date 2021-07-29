@@ -9,11 +9,15 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
+import Card from '@material-ui/core/Card';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    textAlign: "center"
+    textAlign: "center",
+    border: "1px solid black",
+    justifyContent: "center",
+    margin: theme.spacing(1),
   },
   main: {
     textAlign: "center",
@@ -58,6 +62,11 @@ export default function Home() {
       {comment.userEmail}
     </p>
   ));
+  const userImage = item?.comments.map((comment) => (
+    <p key={comment._id}>
+      <Avatar alt="Remy Sharp" src={comment.userImage} />
+    </p>
+  ));
  
   useEffect(() => {
     client.get(`/api/completenew?id=${id}`).then((result) => {
@@ -80,7 +89,6 @@ export default function Home() {
           <div className={classes.description}>
             <p>{item?.description}</p>
           </div>
-
           <footer className={classes.footer}>
             <TextField
               className={classes.comment}
@@ -97,15 +105,17 @@ export default function Home() {
             >
               Добавить
             </Button>
-              <CardHeader className={classes.root}
-              avatar={
-                <Avatar aria-label="recipe">
-                  P
-                </Avatar>
-              }
-              title={userEmail}
-              subheader={value}
-            />
+            {item.comments.map((comment) => (
+            <Card key={comment._id} className={classes.root}>
+              <CardHeader
+                avatar={
+                  <Avatar alt="Remy Sharp" src={comment.userImage} />
+                }
+                title={comment.userEmail}
+                subheader={comment.value}
+              />
+            </Card>
+            ))}
           </footer>
         </main>
       ) : (
