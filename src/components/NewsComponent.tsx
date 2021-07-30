@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { FC } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useNewsList } from "services/news-list";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +23,6 @@ export interface NewsItemComponentProps {
 export const NewsComponent: FC<NewsItemComponentProps> = (props) => {
   const { tags } = props;
   const classes = useStyles();
-
   const news = useNewsList(tags);
 
   return (
@@ -30,7 +30,9 @@ export const NewsComponent: FC<NewsItemComponentProps> = (props) => {
       <Grid container spacing={3}>
         <div className={classes.hotnews}>
           {news.map((item) => (
-            <NewsItemComponent key={item.id} item={item} />
+            <Link href={`/completenew/${item.id}`} >
+              <NewsItemComponent key={item.id} item={item} />
+            </Link>
           ))}
         </div>
       </Grid>
