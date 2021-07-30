@@ -42,9 +42,6 @@ export default function Home() {
       })
       .catch(() => {});
   } 
-  function click() {
-    
-  }
 
   const changeComment = (index, value) => {
     setComments((arr) => {
@@ -58,6 +55,15 @@ export default function Home() {
       setComments(result.data);
     });
   }, []);
+
+  function click(index) {
+    const comment = comments[index];
+    client
+      .post("/api/admin/deletecomments", {
+        id: comment._id,
+      })
+      .catch(() => {});
+  } 
  
   return (
     <div>
@@ -83,7 +89,7 @@ export default function Home() {
               onClick={() => clickHandler(index)}
             >Save</Button>
             
-            <IconButton aria-label="delete" className={classes.margin} onClick={click}>
+            <IconButton aria-label="delete" className={classes.margin}  onClick={() => click(index)}>
               <DeleteIcon />
             </IconButton>
           </CardMedia>
