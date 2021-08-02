@@ -8,7 +8,7 @@ export const useNewsList = (tags?: string[]) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await client.get<NewsItem[]>("/api/news", {
+        const result = await client.get<NewsItem[]>("/api/newsItem", {
           params: { tags: tags ?? [] },
         });
         setNews(result.data);
