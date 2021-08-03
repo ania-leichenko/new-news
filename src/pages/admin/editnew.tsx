@@ -37,10 +37,32 @@ export default function Home() {
   let id = router.query.id;
 
   let [item, setItem] = useState<NewsItem>();
+  let [title, setTitle] = useState<NewsItem>();
+  let [description, setDescription]= useState<NewsItem>();
+
+  const changeTitle = (valueTitle) => {
+    setTitle(valueTitle);
+  }
+  
+  const changeDescription = (valueDescription) => {
+    setDescription(valueDescription);
+  }
+
+  function clickHandler () {
+    client
+    .post("/api/admin/savenews", {
+      title: title,
+      description: description,
+      id: id,
+    })
+    .catch(() => {});
+  }
 
   useEffect(() => {
     client.get(`/api/admin/editnew?id=${id}`).then((result) => {
       setItem(result.data);
+      setTitle(result.data);
+      setDescription(result.data);
     });
   }, [id]);
   
@@ -50,18 +72,27 @@ export default function Home() {
         <main className={classes.main}>
           <img src={item.image} />
           <div>
-            <TextField defaultValue={item.title} 
-            className={classes.title}>
+            <TextField 
+                defaultValue={item.title} 
+                className={classes.title}
+                onChange={(e) => {
+                  changeTitle(e.target.value);
+                }}>
             </TextField> 
           </div>
           <div>
            <TextField defaultValue={item.description} 
-           className={classes.description} />
+           className={classes.description}
+           onChange={(e) => {
+            changeDescription(e.target.value);
+           }}>
+           </TextField>
          </div>
          <footer>
             <Button
             className={classes.button}
             color="primary"
+            onClick={clickHandler}
             >Save</Button>
          </footer>
         </main>
