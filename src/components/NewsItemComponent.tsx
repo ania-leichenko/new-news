@@ -9,7 +9,7 @@ import { NewsItem } from "../types/newsItem";
 
 const useStyles = makeStyles((theme) => ({
   hot: {
-    maxWidth: 345,
+    maxWidth: 500,
   },
   media: {
     height: 0,
