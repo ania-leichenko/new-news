@@ -19,7 +19,7 @@ export default function LayoutTextFields() {
   let [tags, setTags] = useState("");
   function clickHandler() {
     client
-      .post("/api/createnew", {
+      .post("/api/admin/createnew", {
         title,
         description,
         tags,
