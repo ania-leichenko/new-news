@@ -51,7 +51,7 @@ export default function Home() {
   let id = router.query.id;
   let [item, setItem] = useState<NewsItem>();
   let [comment, setComment] = useState("");
-
+  
   function clickHandler() {
     client
       .post("/api/comments", {
@@ -60,22 +60,18 @@ export default function Home() {
       })
       .catch(() => {});
   }
-  const value = item?.comments.map((comment) => (
-    <p key={comment._id}>
-      {comment.value}
-    </p>
-  ));
-  const userEmail = item?.comments.map((comment) => (
-    <p key={comment._id}>
-      {comment.userEmail}
-    </p>
-  ));
-  const userImage = item?.comments.map((comment) => (
-    <p key={comment._id}>
-      <Avatar alt="Remy Sharp" src={comment.userImage} />
-    </p>
-  ));
- 
+
+ let onKeyPressHandler = e => {
+    if (e.key === 'Enter') {
+      client
+      .post("/api/comments", {
+        comment,
+        id,
+      })
+      .catch(() => {});
+    }
+};
+
   useEffect(() => {
     client.get(`/api/completenew?id=${id}`).then((result) => {
       setItem(result.data);
@@ -104,6 +100,7 @@ export default function Home() {
               onChange={function (e) {
                 setComment(e.target.value);
               }}
+              onKeyPress={onKeyPressHandler}
             />
             <Button
               className={classes.add}
