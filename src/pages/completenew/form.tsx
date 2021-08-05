@@ -17,6 +17,7 @@ export default function LayoutTextFields() {
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [tags, setTags] = useState("");
+
   function clickHandler() {
     client
       .post("/api/admin/createnew", {
@@ -26,6 +27,18 @@ export default function LayoutTextFields() {
       })
       .catch(() => {});
   }
+
+  let onKeyPressHandler = e => {
+    if (e.key === 'Enter') {
+      client
+      .post("/api/admin/createnew", {
+        title,
+        description,
+        tags,
+      })
+      .catch(() => {});
+    }
+};
 
   return (
     <div>
@@ -42,6 +55,7 @@ export default function LayoutTextFields() {
         onChange={function (e) {
           setTitle(e.target.value);
         }}
+        onKeyPress={onKeyPressHandler}
       />
       <TextField
         id="standard-full-width"
@@ -56,6 +70,7 @@ export default function LayoutTextFields() {
         onChange={function (e) {
           setDescription(e.target.value);
         }}
+        onKeyPress={onKeyPressHandler}
       />
       <TextField
         id="standard-full-width"
@@ -70,6 +85,7 @@ export default function LayoutTextFields() {
         onChange={function (e) {
           setTags(e.target.value);
         }}
+        onKeyPress={onKeyPressHandler}
       />
         <Button variant="contained" color="primary" onClick={clickHandler}>
           Опубликовать
