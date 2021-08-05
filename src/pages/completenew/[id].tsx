@@ -10,14 +10,17 @@ import TextField from "@material-ui/core/TextField";
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
-    textAlign: "center",
-    border: "1px solid black",
-    justifyContent: "center",
     margin: theme.spacing(1),
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
   main: {
     textAlign: "center",
@@ -34,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
   },
   comment: {
     width: "500px",
+  },
+  paper: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
   },
 }));
 
@@ -106,15 +114,17 @@ export default function Home() {
               Добавить
             </Button>
             {item.comments.map((comment) => (
-            <Card key={comment._id} className={classes.root}>
-              <CardHeader
-                avatar={
-                  <Avatar alt="Remy Sharp" src={comment.userImage} />
-                }
-                title={comment.userEmail}
-                subheader={comment.value}
-              />
-            </Card>
+              <Paper  key={comment._id} className={classes.paper}>
+              <Grid container wrap="nowrap" spacing={2}>
+                <Grid item>
+                  <Avatar alt="Remy Sharp" src={comment.userImage} ></Avatar>
+                </Grid>
+                <Grid item xs zeroMinWidth>
+                  <Typography noWrap>{comment.userEmail}</Typography>
+                  <Typography noWrap>{comment.value}</Typography>
+                </Grid>
+              </Grid>
+            </Paper>
             ))}
           </footer>
         </main>
