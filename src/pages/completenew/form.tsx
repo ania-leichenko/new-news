@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { client } from "@/api/axios";
 import Button from "@material-ui/core/Button";
+import { Input } from '@material-ui/core';
+import document from "next/document";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -17,14 +19,17 @@ export default function LayoutTextFields() {
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [tags, setTags] = useState("");
+  let [newImg, setNewImg] = useState("");
 
   function clickHandler() {
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('tags', tags);
+    formData.append('newImg', newImg);
+    
     client
-      .post("/api/admin/createnew", {
-        title,
-        description,
-        tags,
-      })
+      .post("/api/admin/createnew", formData, {headers: {Accept: "application/json"}})
       .catch(() => {});
   }
 
@@ -35,11 +40,19 @@ export default function LayoutTextFields() {
         title,
         description,
         tags,
+        newImg,
       })
       .catch(() => {});
     }
-};
+  };
 
+  const handleImgChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+        const img = e.target.files[0];
+        setNewImg(img);
+    }
+  };
+  
   return (
     <div>
       <TextField
@@ -87,6 +100,9 @@ export default function LayoutTextFields() {
         }}
         onKeyPress={onKeyPressHandler}
       />
+      <div>
+        <Input type="file" onChange={handleImgChange} />
+      </div>
         <Button variant="contained" color="primary" onClick={clickHandler}>
           Опубликовать
         </Button>
