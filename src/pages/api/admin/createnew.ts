@@ -2,6 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import db from "db";
 import { getSession } from "next-auth/client";
 import { ADMINS } from "@/constants";
+import formidable from 'formidable';
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
@@ -14,12 +22,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(403).json({ error: "403" });
     return;
   }
-
-  db.news.save({
-    title: req.body.title,
-    description: req.body.description,
-    image: "/image/polaroid.jpg",
-    tags: req.body.tags.split(","),
-  });
+  
+  const form = new formidable.IncomingForm();
+  form.uploadDir = "./public/upload/";
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+    const image =  files.newImg.path.replace("public\\upload\\", "/upload/");
+    db.news.save({
+      title: fields.title,
+      description: fields.description,
+      image,
+      tags: fields.tags.split(","),
+    });
+  });  
   res.status(200).json({});
 };

@@ -41,7 +41,7 @@ export default function NewsItemComponent({ item }: NewsItemComponentProps) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  
   return (
     <Card className={classes.hot} >
       <CardMedia

@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.12.0",
     "diskdb": "^0.1.17",
+    "formidable": "^1.2.2",
     "formik": "^2.2.9",
     "next": "10.2.3",
     "next-auth": "^3.27.0",
