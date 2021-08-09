@@ -4,7 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import { client } from "@/api/axios";
 import Button from "@material-ui/core/Button";
 import { Input } from '@material-ui/core';
-import document from "next/document";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -35,13 +34,14 @@ export default function LayoutTextFields() {
 
   let onKeyPressHandler = e => {
     if (e.key === 'Enter') {
-      client
-      .post("/api/admin/createnew", {
-        title,
-        description,
-        tags,
-        newImg,
-      })
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('tags', tags);
+    formData.append('newImg', newImg);
+    
+    client
+      .post("/api/admin/createnew", formData, {headers: {Accept: "application/json"}})
       .catch(() => {});
     }
   };
@@ -100,7 +100,7 @@ export default function LayoutTextFields() {
         }}
         onKeyPress={onKeyPressHandler}
       />
-      <div>
+      <div className="classes.file">
         <Input type="file" onChange={handleImgChange} />
       </div>
         <Button variant="contained" color="primary" onClick={clickHandler}>
