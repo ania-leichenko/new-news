@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   main: {
     textAlign: "center",
+    marginTop: "30px",
   },
   description: {
     fontSize: "20px",
