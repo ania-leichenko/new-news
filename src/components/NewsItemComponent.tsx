@@ -47,11 +47,10 @@ export default function NewsItemComponent({ item }: NewsItemComponentProps) {
       <CardMedia
         className={classes.media}
         image={item.image}
-        title="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {item.title}
+        <Typography variant="body2" component="p">
+          <h2>{item.title}</h2>
         </Typography>
       </CardContent>
     </Card>

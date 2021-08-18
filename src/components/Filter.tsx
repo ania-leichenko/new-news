@@ -1,7 +1,6 @@
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-
 interface FilterProps {
   filter: string;
   setFilter: Function;
