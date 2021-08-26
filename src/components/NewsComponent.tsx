@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   },
 }));
@@ -29,9 +29,9 @@ export const NewsComponent: FC<NewsItemComponentProps> = (props) => {
     <div className={classes.root}>
       <Grid container>
         {news.map((item) => (
-          <Grid item xs={4} className={classes.paper}> 
-            <Link href={`/completenew/${item.id}`} >
-              <NewsItemComponent key={item.id} item={item} />
+          <Grid key={item.id} item xs={4} className={classes.paper}>
+            <Link href={`/completenew/${item.id}`}>
+              <NewsItemComponent item={item} />
             </Link>
           </Grid>
         ))}

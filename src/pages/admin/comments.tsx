@@ -71,7 +71,7 @@ export default function Home() {
         <Card key={comment._id} className={classes.root}>
           <CardHeader
             avatar={
-              <Avatar alt="Remy Sharp" src={comment.userImage} />
+              <Avatar alt="User Image" src={comment.userImage} />
             }
             title={comment.userEmail}
             subheader={(
@@ -88,7 +88,6 @@ export default function Home() {
               color="primary"
               onClick={() => clickHandler(index)}
             >Save</Button>
-            
             <IconButton aria-label="delete" className={classes.margin}  onClick={() => click(index)}>
               <DeleteIcon />
             </IconButton>
