@@ -28,10 +28,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NewsItemComponent() {
    const [news, setNews] =  useState<NewsItem[]>([]);
-   
+   const classes = useStyles();
+
    useEffect(() => {
     client
-    .get("/api/newsItem", {
+    .get("/api/articles", {
       
     })
     .then((result) => {
@@ -40,11 +41,10 @@ export default function NewsItemComponent() {
     .catch(() => {}); 
     
   }, [])
-  const classes = useStyles();
   
   function handleClick (id) {
     client
-      .post("/api/admin/deletenew", {
+      .post("/api/admin/delete-article", {
         id: id,
       })
       .catch(() => {});
@@ -57,13 +57,12 @@ export default function NewsItemComponent() {
         <CardMedia
             className={classes.media}
             image={item.image}
-            title="Paella dish"
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             {item.title}
           </Typography>
-          <Link href={`/admin/editnew?id=${item.id}`}>
+          <Link href={`/admin/edit-article?id=${item.id}`}>
             <IconButton aria-label="edit" className={classes.margin}>
                 <EditIcon />
             </IconButton>

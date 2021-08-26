@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: "15px",
   },
-  inputRoot: {
-    fontSize: 30
-  },
 }));
 
 export default function Home() {
@@ -50,7 +47,7 @@ export default function Home() {
 
   function clickHandler () {
     client
-    .post("/api/admin/savenews", {
+    .post("/api/admin/save-article", {
       title: title,
       description: description,
       id: id,
@@ -59,7 +56,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    client.get(`/api/admin/editnew?id=${id}`).then((result) => {
+    client.get(`/api/admin/edit-article?id=${id}`).then((result) => {
       setItem(result.data);
       setTitle(result.data);
       setDescription(result.data);

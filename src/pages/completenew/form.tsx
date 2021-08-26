@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { client } from "@/api/axios";
 import Button from "@material-ui/core/Button";
 import { Input } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "25ch",
-  },
-}));
-
 export default function LayoutTextFields() {
-  const classes = useStyles();
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [tags, setTags] = useState("");
@@ -28,7 +18,7 @@ export default function LayoutTextFields() {
     formData.append('newImg', newImg);
     
     client
-      .post("/api/admin/createnew", formData, {headers: {Accept: "application/json"}})
+      .post("/api/admin/create-article", formData, {headers: {Accept: "application/json"}})
       .catch(() => {});
   }
 
@@ -41,7 +31,7 @@ export default function LayoutTextFields() {
     formData.append('newImg', newImg);
     
     client
-      .post("/api/admin/createnew", formData, {headers: {Accept: "application/json"}})
+      .post("/api/admin/create-article", formData, {headers: {Accept: "application/json"}})
       .catch(() => {});
     }
   };
@@ -100,7 +90,7 @@ export default function LayoutTextFields() {
         }}
         onKeyPress={onKeyPressHandler}
       />
-      <div className="classes.file">
+      <div>
         <Input type="file" onChange={handleImgChange} />
       </div>
         <Button variant="contained" color="primary" onClick={clickHandler}>
