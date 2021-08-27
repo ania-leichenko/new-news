@@ -3,8 +3,21 @@ import Head from "next/head";
 import Header from "../components/Header/Header";
 import { NewsComponent } from "components/NewsComponent";
 import Filter from "components/Filter";
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { makeStyles } from "@material-ui/styles";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+
+const useStyles = makeStyles(() => ({
+  nextpage: {
+   color: "black",
+  },
+}));
+
 
 export default function Home() {
+  const classes = useStyles();
   const [filter, setFilter] = useState("all");
   const [tags, setTags] = useState(["hot"]);
 
@@ -26,6 +39,88 @@ export default function Home() {
         <Filter filter={filter} setFilter={setFilter} />
         <NewsComponent tags={tags} />
       </main>
+      <footer>
+        <Grid container justify="center">
+          <h2>  
+             New-news      
+          </h2>
+          <Button href="/">
+            <ArrowForwardIosIcon></ArrowForwardIosIcon>
+          </Button>
+        </Grid>
+        <Grid container justify="center">
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 1" className="fl" href="/">
+                <span className={classes.nextpage}>1</span>
+              </a>
+            </div>
+          </Box>
+          <Box m={1}> 
+            <div>
+              <a aria-label="Page 2" className="fl" href="/">
+                <span className={classes.nextpage}>2</span>
+              </a>
+            </div>
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 3" className="fl" href="/">
+                <span className={classes.nextpage}>3</span>
+              </a>
+            </div>
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 4" className="fl" href="/">
+                <span className={classes.nextpage}>4</span>
+              </a>
+            </div>
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 5" className="fl" href="/">
+                <span className={classes.nextpage}>5</span>
+              </a>
+            </div>
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 6" className="fl" href="/">
+                <span className={classes.nextpage}>6</span>
+              </a>
+            </div>   
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 7" className="fl" href="/">
+                <span className={classes.nextpage}>7</span>
+              </a>
+            </div> 
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 8" className="fl" href="/">
+                <span className={classes.nextpage}>8</span>
+              </a>
+            </div>  
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 9" className="fl" href="/">
+                <span className={classes.nextpage}>9</span>
+              </a>
+            </div>
+          </Box>
+          <Box m={1}>
+            <div>
+              <a aria-label="Page 10" className="fl" href="/">
+                <span className={classes.nextpage}>10</span>
+              </a>
+            </div>
+          </Box>
+        </Grid>
+      </footer>
     </div>
   );
 }
