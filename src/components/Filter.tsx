@@ -22,6 +22,7 @@ export default function Filter({ filter, setFilter }: FilterProps) {
           variant="contained"
           color="primary"
           onClick={allClickHandler}
+          disabled={filter === "all"}
         >
           Все
         </Button>
@@ -32,6 +33,7 @@ export default function Filter({ filter, setFilter }: FilterProps) {
           variant="contained"
           color="primary"
           onClick={hotClickHandler}
+          disabled={filter === "hot"}
         >
           Горячие
         </Button>
