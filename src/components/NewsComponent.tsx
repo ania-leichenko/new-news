@@ -18,12 +18,13 @@ const useStyles = makeStyles((theme) => ({
 
 export interface NewsItemComponentProps {
   tags: string[];
+  page: number;
 }
 
 export const NewsComponent: FC<NewsItemComponentProps> = (props) => {
-  const { tags } = props;
+  const { tags, page} = props;
   const classes = useStyles();
-  const news = useNewsList(tags);
+  const news = useNewsList(tags, page);
 
   return (
     <div className={classes.root}>
