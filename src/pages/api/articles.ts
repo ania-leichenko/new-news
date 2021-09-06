@@ -4,7 +4,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const tags = getTags(req.query["tags"]);
   const page: number = Number(req.query["page"]) || 1;
-  console.log(page);
   let result = db.news.find();
 
   result = result.map((item) => ({ ...item, id: item._id }));
