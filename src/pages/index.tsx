@@ -23,6 +23,7 @@ export default function Home() {
   let page = Number(router.query.page) || 1;
   const [filter, setFilter] = useState("all");
   const [tags, setTags] = useState<string[]>([]);
+  let nextPage = page + 1; 
 
   useEffect(() => {
     const result = filter === "all" ? [] : ["hot"];
@@ -40,12 +41,12 @@ export default function Home() {
       <Header />
       <main>
         <Filter filter={filter} setFilter={setFilter} />
-        <NewsComponent tags={tags} page={page} />
+        <NewsComponent tags={tags}  page={page}/>
       </main>
       <footer>
         <Grid container justify="center">
           <h2>New-news</h2>
-          <Button href="/">
+          <Button href={'/?page=' + nextPage}>            
             <ArrowForwardIosIcon></ArrowForwardIosIcon>
           </Button>
         </Grid>
