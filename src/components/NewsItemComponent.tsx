@@ -6,7 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { NewsItem } from "../types/newsItem";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   hot: {
     maxWidth: 500,
   },

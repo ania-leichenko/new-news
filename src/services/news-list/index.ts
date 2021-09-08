@@ -4,14 +4,18 @@ import { client } from "api/axios";
 
 export const useNewsList = (tags: string[], page: number) => {
   const [news, setNews] = useState<NewsItem[]>([]);
-
+  const [pagesCount, setPagesCount] = useState<number>();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await client.get<NewsItem[]>("/api/articles", {
+        const result = await client.get<{
+          items: NewsItem[];
+          count: number;
+        }>("/api/articles", {
           params: { tags: tags ?? [], page: page ?? 1 },
         });
-        setNews(result.data);
+        setNews(result.data.items);
+        setPagesCount(result.data.count);
       } catch (error) {
         setNews([]);
       }
@@ -20,5 +24,8 @@ export const useNewsList = (tags: string[], page: number) => {
     fetchData();
   }, [tags, page]);
 
-  return news;
+  return {
+    news,
+    pagesCount,
+  };
 };

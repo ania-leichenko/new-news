@@ -13,8 +13,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const count = result.length;
-
+  let count = result.length / 6;
   let end = page * 6;
   let start = end - 6;
   // page = 1 -> 0, 6
@@ -23,7 +22,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   // page = 6 -> 30, 36
   result = result.slice(start, end);
 
-  res.status(200).json(result);
+  res.status(200).json({items: result, count});
 };
 
 export function getTags(input: string | string[]): string[] {
