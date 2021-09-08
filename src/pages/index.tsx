@@ -10,10 +10,12 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import { useRouter } from "next/router";
+import { useNewsList } from "@/services/news-list";
 
 const useStyles = makeStyles(() => ({
   nextpage: {
     color: "black",
+    marginLeft: "5px",
   },
 }));
 
@@ -21,9 +23,11 @@ export default function Home() {
   const classes = useStyles();
   const router = useRouter();
   let page = Number(router.query.page) || 1;
+  let nextPage = page + 1;
   const [filter, setFilter] = useState("all");
   const [tags, setTags] = useState<string[]>([]);
-  let nextPage = page + 1; 
+
+  const { news, pagesCount } = useNewsList(tags, page);
 
   useEffect(() => {
     const result = filter === "all" ? [] : ["hot"];
@@ -41,87 +45,26 @@ export default function Home() {
       <Header />
       <main>
         <Filter filter={filter} setFilter={setFilter} />
-        <NewsComponent tags={tags}  page={page}/>
+        <NewsComponent news={news} />
       </main>
       <footer>
         <Grid container justify="center">
           <h2>New-news</h2>
-          <Button href={'/?page=' + nextPage}>            
+          <Button href={"/?page=" + nextPage}>
             <ArrowForwardIosIcon></ArrowForwardIosIcon>
           </Button>
         </Grid>
         <Grid container justify="center">
           <Box m={1}>
-            <div>
-              <Link aria-label="Page 1" href={"/?page=1"}>
-                <span className={classes.nextpage}>1</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 2" href={"/?page=2"}>
-                <span className={classes.nextpage}>2</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 3" href={"/?page=3"}>
-                <span className={classes.nextpage}>3</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 4" href={"/?page=4"}>
-                <span className={classes.nextpage}>4</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 5" href={"/?page=5"}>
-                <span className={classes.nextpage}>5</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 6" href={"/?page=6"}>
-                <span className={classes.nextpage}>6</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 7" href={"/?page=7"}>
-                <span className={classes.nextpage}>7</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 8" href={"/?page=8"}>
-                <span className={classes.nextpage}>8</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 9" href={"/?page=9"}>
-                <span className={classes.nextpage}>9</span>
-              </Link>
-            </div>
-          </Box>
-          <Box m={1}>
-            <div>
-              <Link aria-label="Page 10" href={"/?page=10"}>
-                <span className={classes.nextpage}>10</span>
-              </Link>
-            </div>
-          </Box>
-        </Grid>
+            {Array(pagesCount)
+              .fill(null)
+              .map((item, index) => (
+                  <Link aria-label="Page 1" href={"/?page=" + (index + 1)}>
+                    <span className={classes.nextpage}>{index + 1}</span>
+                  </Link>
+              ))}
+            </Box>
+          </Grid>
       </footer>
     </div>
   );
