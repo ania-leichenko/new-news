@@ -4,7 +4,7 @@ import { client } from "api/axios";
 
 export const useNewsList = (tags: string[], page: number) => {
   const [news, setNews] = useState<NewsItem[]>([]);
-  const [pagesCount, setPagesCount] = useState<number>();
+  const [pagesCount, setPagesCount] = useState<number>(Number);
   useEffect(() => {
     const fetchData = async () => {
       try {
