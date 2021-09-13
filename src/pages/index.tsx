@@ -12,6 +12,12 @@ import { useNewsList } from "@/services/news-list";
 import {Pagination} from '@material-ui/lab';
 
 const useStyles = makeStyles(() => ({
+  root: {
+    maxWidth: 1400,
+    isplay: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
   nextpage: {
     color: "black",
     marginLeft: "5px",
@@ -54,7 +60,9 @@ export default function Home() {
       <Header />
       <main>
         <Filter filter={filter} setFilter={setFilter} />
-        <NewsComponent news={news} />
+        <div className={classes.root}>
+          <NewsComponent news={news} />
+        </div>
       </main>
       <footer>
          <Grid container justify="center">
