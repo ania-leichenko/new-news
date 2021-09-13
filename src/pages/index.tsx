@@ -59,7 +59,7 @@ export default function Home() {
       <footer>
          <Grid container justify="center">
           <Box m={1}>
-            <h2>New-news</h2>
+            <h2>new-news</h2>
           </Box>
         </Grid>
         <Grid container justify="center">
