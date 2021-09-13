@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Sign from "@/components/Header/Sign";
 import { client } from "api/axios";
+import Link from 'next/link';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +16,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "white",
+    fontSize: "20px",
   },
 }));
 
@@ -41,9 +43,9 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            new-news.
-          </Typography>
+          <Link href="/" >
+            <a className={classes.title}>new-news.</a>
+          </Link>
           {auth && (
             <div>
               <IconButton
