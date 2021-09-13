@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import Link from 'next/link';
 import { useRouter } from "next/router";
 import { useNewsList } from "@/services/news-list";
-import Button from "@material-ui/core/Button";
+import {Pagination} from '@material-ui/lab';
 
 const useStyles = makeStyles(() => ({
   nextpage: {
@@ -22,8 +22,6 @@ export default function Home() {
   const classes = useStyles();
   const router = useRouter();
   let page = Number(router.query.page) || 1;
-  let nextPage = page + 1;
-  let currentPage = page - 1;
   const [filter, setFilter] = useState("all");
   const [tags, setTags] = useState<string[]>([]);
   const { news, pagesCount } = useNewsList(tags, page);
@@ -34,6 +32,18 @@ export default function Home() {
     setTags(result);
   }, [filter]);
 
+  function handleClick(event, page) {
+    {Array(page)
+      .fill(null)
+      .map((item, index) => ( 
+        <Link href={"/?page=" + (index + 1)}>
+          <a key={index} className={classes.nextpage}>
+            {index + 1}
+          </a>
+        </Link>
+      ))}
+  }
+  
   return (
     <div>
       <Head>
@@ -54,36 +64,8 @@ export default function Home() {
         </Grid>
         <Grid container justify="center">
           <Box m={1}>
-            <Link href={"/?page=" + currentPage}>
-            <Button size="small"
-              variant="contained"
-              color="primary"
-              disabled={currentPage < 1}>
-              Назад
-            </Button>
-            </Link>
+            <Pagination defaultPage={1} count={2} color="primary" onChange={handleClick}/>
           </Box>
-          <Box m={1}>
-            {Array(pagesCount)
-              .fill(null)
-              .map((item, index) => ( 
-                <Link href={"/?page=" + (index + 1)}>
-                  <a key={index} className={classes.nextpage}>
-                    {index + 1}
-                  </a>
-                </Link>
-              ))}
-          </Box>
-            <Box m={1}>
-              <Link href={"/?page=" + nextPage}>
-                <Button size="small"
-                  variant="contained"
-                  color="primary"
-                  disabled={nextPage > pagesCount}>
-                  Вперед
-                </Button>
-              </Link>
-            </Box>
         </Grid>
       </footer>
     </div>
