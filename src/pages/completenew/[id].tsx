@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
   },
   description: {
     fontSize: "20px",
+    maxWidth: 1200,
+    isplay: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   footer: {
     textAlign: "center",
@@ -31,9 +35,12 @@ const useStyles = makeStyles((theme) => ({
     width: "500px",
   },
   paper: {
-    maxWidth: 400,
+    maxWidth: 1200,
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
+  },
+  image: {
+    maxWidth: 800,
   },
 }));
 
@@ -90,7 +97,7 @@ export default function Home() {
       <Header />
       {item ? (
         <main className={classes.main}>
-          <img src={item?.image} />
+          <img className={classes.image} src={item?.image} />
           <h1>{item?.title}</h1>
           <div className={classes.description}>
             <p>{item?.description}</p>
