@@ -6,10 +6,10 @@ import Filter from "components/Filter";
 import { makeStyles } from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Link from 'next/link';
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useNewsList } from "@/services/news-list";
-import {Pagination} from '@material-ui/lab';
+import { Pagination } from "@material-ui/lab";
 
 const useStyles = makeStyles(() => ({
   nextpage: {
@@ -21,10 +21,10 @@ const useStyles = makeStyles(() => ({
 export default function Home() {
   const classes = useStyles();
   const router = useRouter();
-  let page = Number(router.query.page) || 1;
+  let currentPage = Number(router.query.page) || 1;
   const [filter, setFilter] = useState("all");
   const [tags, setTags] = useState<string[]>([]);
-  const { news, pagesCount } = useNewsList(tags, page);
+  const { news, pagesCount } = useNewsList(tags, currentPage);
 
   useEffect(() => {
     const result = filter === "all" ? [] : ["hot"];
@@ -33,17 +33,11 @@ export default function Home() {
   }, [filter]);
 
   function handleClick(event, page) {
-    {Array(page)
-      .fill(null)
-      .map((item, index) => ( 
-        <Link href={"/?page=" + (index + 1)}>
-          <a key={index} className={classes.nextpage}>
-            {index + 1}
-          </a>
-        </Link>
-      ))}
+    router.push(`/?page=${page}`);
+
+    console.log(page);
   }
-  
+
   return (
     <div>
       <Head>
@@ -57,14 +51,19 @@ export default function Home() {
         <NewsComponent news={news} />
       </main>
       <footer>
-         <Grid container justify="center">
+        <Grid container justify="center">
           <Box m={1}>
             <h2>New-news</h2>
           </Box>
         </Grid>
         <Grid container justify="center">
           <Box m={1}>
-            <Pagination defaultPage={1} count={2} color="primary" onChange={handleClick}/>
+            <Pagination
+              defaultPage={currentPage}
+              count={pagesCount}
+              color="primary"
+              onChange={handleClick}
+            />
           </Box>
         </Grid>
       </footer>
