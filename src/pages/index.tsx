@@ -36,12 +36,11 @@ export default function Home() {
     const result = filter === "all" ? [] : ["hot"];
 
     setTags(result);
+    router.push(`/?tags=${result}&page=1`);
   }, [filter]);
 
   function handleClick(event, page) {
     router.push(`/?page=${page}`);
-
-    console.log(page);
   }
 
   return (
@@ -68,7 +67,7 @@ export default function Home() {
           <Box m={1}>
             <Pagination
               defaultPage={currentPage}
-              count={pagesCount}
+              count={Math.round(pagesCount)}
               color="primary"
               onChange={handleClick}
             />

@@ -27,5 +27,6 @@ export const useNewsList = (tags: string[], page: number) => {
   return {
     news,
     pagesCount,
+    tags,
   };
 };
