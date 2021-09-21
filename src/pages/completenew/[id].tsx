@@ -11,15 +11,23 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { Typography } from "@material-ui/core";
+import { NewsComponent } from "@/components/NewsComponent";
+import { useNewsList } from "@/services/news-list";
 
 const useStyles = makeStyles((theme) => ({
-  main: {
+  root: {
     maxWidth: 1000,
     isplay: "block",
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "30px",
-    maxWidth: 1000,
+  },
+  main: {
+    marginTop: "40px",
+  },
+  footer: {
+    marginTop: "80px",
+    textAlign: "center",
   },
   description: {
     fontSize: "20px",
@@ -52,10 +60,6 @@ const useStyles = makeStyles((theme) => ({
   sobutia: {
     marginBottom: "30px",
   },
-  footer: {
-   textAlign: "center",
-   marginTop: "80px",
-  }
 }));
 
 export default function Home() {
@@ -64,6 +68,9 @@ export default function Home() {
   let id = router.query.id;
   let [item, setItem] = useState<NewsItem>();
   let [comment, setComment] = useState("");
+  let currentPage = Number(router.query.page) || 1;
+  const [tags, setTags] = useState<string[]>([]);
+  const { news, pagesCount } = useNewsList(tags, currentPage);
   
   function clickHandler() {
     client
@@ -108,57 +115,66 @@ export default function Home() {
       </Head>
       <Header />
       {item ? (
-        <main className={classes.main}>
-          <div>
-            <Grid className={classes.sobutia}>
-            <div className={classes.line}>
-              <h2>Cобытия</h2>
+        <div className={classes.root}>
+          <main className={classes.main}>
+            <div>
+              <Grid className={classes.sobutia}>
+              <div className={classes.line}>
+                <h2>Cобытия</h2>
+              </div>
+              </Grid>
             </div>
-            </Grid>
-          </div>
-          <img className={classes.image} src={item?.image} />
-          <h1>{item?.title}</h1>
-          <div className={classes.description}>
-            <p>{item?.description}</p>
-          </div>
-          <div className={classes.stylesComment}>
-            <TextField
-                className={classes.comment}
-                placeholder="Коментарии"
-                onChange={function (e) {
-                  setComment(e.target.value);
-                }}
-                onKeyPress={onKeyPressHandler}
-              />
-              <Button
-                className={classes.add}
+            <img className={classes.image} src={item?.image} />
+            <h1>{item?.title}</h1>
+            <div className={classes.description}>
+              <p>{item?.description}</p>
+            </div>
+            <div className={classes.stylesComment}>
+              <TextField
+                  className={classes.comment}
+                  placeholder="Коментарии"
+                  onChange={function (e) {
+                    setComment(e.target.value);
+                  }}
+                  onKeyPress={onKeyPressHandler}
+                />
+                <Button
+                  className={classes.add}
+                  variant="contained"
+                  color="primary"
+                  onClick={clickHandler}
+                >
+                  Добавить
+                </Button>
+                {item.comments.map((comment) => (
+                  <Paper  key={comment._id} className={classes.paper}>
+                  <Grid container wrap="nowrap" spacing={2}>
+                    <Grid item>
+                      <Avatar alt="Remy Sharp" src={comment.userImage} ></Avatar>
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography noWrap>{comment.userEmail}</Typography>
+                      <Typography noWrap>{comment.value}</Typography>
+                    </Grid>
+                  </Grid>
+                </Paper>
+                ))}
+              </div>
+              <footer className={classes.footer}>
+                <h3>ЧИТАЙТЕ ЕЩЁ:</h3>
+                <NewsComponent news={news} />
+                <Button
                 variant="contained"
                 color="primary"
-                onClick={clickHandler}
-              >
-                Добавить
-              </Button>
-              {item.comments.map((comment) => (
-                <Paper  key={comment._id} className={classes.paper}>
-                <Grid container wrap="nowrap" spacing={2}>
-                  <Grid item>
-                    <Avatar alt="Remy Sharp" src={comment.userImage} ></Avatar>
-                  </Grid>
-                  <Grid item xs zeroMinWidth>
-                    <Typography noWrap>{comment.userEmail}</Typography>
-                    <Typography noWrap>{comment.value}</Typography>
-                  </Grid>
-                </Grid>
-              </Paper>
-              ))}
-            </div>
-        </main>
+                >
+                ЕЩЁ
+                </Button>
+              </footer>
+            </main>
+          </div>
       ) : (
         <main className={classes.main}>Новость не найдена</main>
       )}
-       <footer className={classes.footer}>
-        <h2>ЧИТАЙТЕ ЕЩЁ:</h2>
-       </footer>
     </div>
   );
 }
