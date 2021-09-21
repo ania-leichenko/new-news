@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     color: "white",
     fontSize: "20px",
+    outline: "none",
+    textDecoration: "none",
   },
 }));
 
@@ -44,7 +46,7 @@ export default function MenuAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Link href="/" >
-            <a className={classes.title}>new-news.</a>
+            <a className={classes.title}>Главная</a>
           </Link>
           {auth && (
             <div>

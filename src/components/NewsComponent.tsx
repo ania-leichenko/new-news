@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  links: {
+    outline: "none",
+    textDecoration: "none",
+  },
 }));
 
 export interface NewsItemComponentProps {
@@ -28,8 +32,8 @@ export const NewsComponent: FC<NewsItemComponentProps> = ({ news }) => {
       <Grid container>
         {news.map((item) => (
           <Grid key={item.id} item xs={4} className={classes.paper}>
-            <Link href={`/completenew/${item.id}`}>
-              <a>
+            <Link href={`/completenew/${item.id}`} >
+              <a className={classes.links}>
                 <NewsItemComponent item={item} />
               </a>
             </Link>

@@ -19,7 +19,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   // page = 1 -> 0, 6
   // page = 2 -> 6, 12
   // page = 3 -> 12, 18
-  // page = 6 -> 30, 36
+  // page = 6 -> 18, 24
   result = result.slice(start, end);
 
   res.status(200).json({items: result, count});
