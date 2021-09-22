@@ -7,9 +7,9 @@ import { NewsItem } from "@/types";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import { Typography } from "@material-ui/core";
 import { NewsComponent } from "@/components/NewsComponent";
 import { useNewsList } from "@/services/news-list";
@@ -71,36 +71,36 @@ export default function Home() {
   let currentPage = Number(router.query.page) || 1;
   const [tags, setTags] = useState<string[]>([]);
   const { news, pagesCount } = useNewsList(tags, currentPage);
-  
+
   function clickHandler() {
     client
       .post("/api/comments", {
         comment,
         id,
-      }).then(()=>{
-        client
-        .get(`/api/completenew?id=${id}`).then((result) => {
+      })
+      .then(() => {
+        client.get(`/api/completenew?id=${id}`).then((result) => {
           setItem(result.data);
         });
       })
       .catch(() => {});
-    }
+  }
 
- let onKeyPressHandler = e => {
-    if (e.key === 'Enter') {
+  let onKeyPressHandler = (e) => {
+    if (e.key === "Enter") {
       client
-      .post("/api/comments", {
-        comment,
-        id,
-      }).then(()=>{
-        client
-        .get(`/api/completenew?id=${id}`).then((result) => {
-          setItem(result.data);
-        });
-      })
-      .catch(() => {});
-    };
-};
+        .post("/api/comments", {
+          comment,
+          id,
+        })
+        .then(() => {
+          client.get(`/api/completenew?id=${id}`).then((result) => {
+            setItem(result.data);
+          });
+        })
+        .catch(() => {});
+    }
+  };
 
   useEffect(() => {
     client.get(`/api/completenew?id=${id}`).then((result) => {
@@ -119,9 +119,9 @@ export default function Home() {
           <main className={classes.main}>
             <div>
               <Grid className={classes.sobutia}>
-              <div className={classes.line}>
-                <h2>Cобытия</h2>
-              </div>
+                <div className={classes.line}>
+                  <h2>Cобытия</h2>
+                </div>
               </Grid>
             </div>
             <img className={classes.image} src={item?.image} />
@@ -131,26 +131,26 @@ export default function Home() {
             </div>
             <div className={classes.stylesComment}>
               <TextField
-                  className={classes.comment}
-                  placeholder="Коментарии"
-                  onChange={function (e) {
-                    setComment(e.target.value);
-                  }}
-                  onKeyPress={onKeyPressHandler}
-                />
-                <Button
-                  className={classes.add}
-                  variant="contained"
-                  color="primary"
-                  onClick={clickHandler}
-                >
-                  Добавить
-                </Button>
-                {item.comments.map((comment) => (
-                  <Paper  key={comment._id} className={classes.paper}>
+                className={classes.comment}
+                placeholder="Коментарии"
+                onChange={function (e) {
+                  setComment(e.target.value);
+                }}
+                onKeyPress={onKeyPressHandler}
+              />
+              <Button
+                className={classes.add}
+                variant="contained"
+                color="primary"
+                onClick={clickHandler}
+              >
+                Добавить
+              </Button>
+              {item.comments.map((comment) => (
+                <Paper key={comment._id} className={classes.paper}>
                   <Grid container wrap="nowrap" spacing={2}>
                     <Grid item>
-                      <Avatar alt="Remy Sharp" src={comment.userImage} ></Avatar>
+                      <Avatar alt="Remy Sharp" src={comment.userImage}></Avatar>
                     </Grid>
                     <Grid item xs zeroMinWidth>
                       <Typography noWrap>{comment.userEmail}</Typography>
@@ -158,20 +158,17 @@ export default function Home() {
                     </Grid>
                   </Grid>
                 </Paper>
-                ))}
-              </div>
-              <footer className={classes.footer}>
-                <h3>ЧИТАЙТЕ ЕЩЁ:</h3>
-                <NewsComponent news={news} />
-                <Button
-                variant="contained"
-                color="primary"
-                >
+              ))}
+            </div>
+            <footer className={classes.footer}>
+              <h3>ЧИТАЙТЕ ЕЩЁ:</h3>
+              <NewsComponent news={news} />
+              <Button variant="contained" color="primary">
                 ЕЩЁ
-                </Button>
-              </footer>
-            </main>
-          </div>
+              </Button>
+            </footer>
+          </main>
+        </div>
       ) : (
         <main className={classes.main}>Новость не найдена</main>
       )}
