@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import { Typography } from "@material-ui/core";
 import { NewsComponent } from "@/components/NewsComponent";
 import { useNewsList } from "@/services/news-list";
+import SimilarNews from "@/components/SimilarNews";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,11 +162,7 @@ export default function Home() {
               ))}
             </div>
             <footer className={classes.footer}>
-              <h3>ЧИТАЙТЕ ЕЩЁ:</h3>
-              <NewsComponent news={news} />
-              <Button variant="contained" color="primary">
-                ЕЩЁ
-              </Button>
+              <SimilarNews />
             </footer>
           </main>
         </div>
