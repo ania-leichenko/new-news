@@ -11,8 +11,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Typography } from "@material-ui/core";
-import { NewsComponent } from "@/components/NewsComponent";
-import { useNewsList } from "@/services/news-list";
 import SimilarNews from "@/components/SimilarNews";
 
 const useStyles = makeStyles((theme) => ({
@@ -71,7 +69,6 @@ export default function Home() {
   let [comment, setComment] = useState("");
   let currentPage = Number(router.query.page) || 1;
   const [tags, setTags] = useState<string[]>([]);
-  const { news, pagesCount } = useNewsList(tags, currentPage);
 
   function clickHandler() {
     client
@@ -151,7 +148,7 @@ export default function Home() {
                 <Paper key={comment._id} className={classes.paper}>
                   <Grid container wrap="nowrap" spacing={2}>
                     <Grid item>
-                      <Avatar alt="Remy Sharp" src={comment.userImage}></Avatar>
+                      <Avatar alt="avatar" src={comment.userImage}></Avatar>
                     </Grid>
                     <Grid item xs zeroMinWidth>
                       <Typography noWrap>{comment.userEmail}</Typography>
@@ -162,7 +159,7 @@ export default function Home() {
               ))}
             </div>
             <footer className={classes.footer}>
-              <SimilarNews />
+              <SimilarNews id={item._id} />
             </footer>
           </main>
         </div>
