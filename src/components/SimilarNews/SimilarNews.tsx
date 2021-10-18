@@ -2,8 +2,9 @@ import Button from "@material-ui/core/Button";
 import { NewsComponent } from "@/components/NewsComponent";
 import useSimilarNews from "./useSimilarNews";
 
-export default function SimilarNews() {
-  const { news, loadMore, canLoadMore } = useSimilarNews();
+export default function SimilarNews({ id }) {
+  const { news, loadMore, canLoadMore } = useSimilarNews(id);
+
   return (
     <div>
       <h3>ЧИТАЙТЕ ЕЩЁ:</h3>
