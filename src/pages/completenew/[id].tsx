@@ -64,13 +64,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
   const classes = useStyles();
   const router = useRouter();
-  let id = router.query.id;
-  let [item, setItem] = useState<NewsItem>();
-  let [comment, setComment] = useState("");
+  const id = router.query.id;
+  const [item, setItem] = useState<NewsItem>();
+  const [comment, setComment] = useState("");
 
-  const handleCommentChange = e => setComment(e.target.value);
+  const handleCommentChange = (e) => setComment(e.target.value);
 
-  function clickHandler() {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
     client
       .post("/api/comments", {
         comment,
@@ -81,23 +82,10 @@ export default function Home() {
           setItem(result.data);
         });
       })
+      .then(() => {
+        setComment("");
+      })
       .catch(() => {});
-  }
-
-  let onKeyPressHandler = (e) => {
-    if (e.key === "Enter") {
-      client
-        .post("/api/comments", {
-          comment,
-          id,
-        })
-        .then(() => {
-          client.get(`/api/completenew?id=${id}`).then((result) => {
-            setItem(result.data);
-          });
-        })
-        .catch(() => {});
-    }
   };
 
   useEffect(() => {
@@ -128,21 +116,22 @@ export default function Home() {
               <p>{item?.description}</p>
             </div>
             <div className={classes.stylesComment}>
-              <TextField
-                className={classes.comment}
-                placeholder="Коментарии"
-                value={comment}
-                onChange={handleCommentChange}
-                onKeyPress={onKeyPressHandler}
-              />
-              <Button
-                className={classes.add}
-                variant="contained"
-                color="primary"
-                onClick={clickHandler}
-              >
-                Добавить
-              </Button>
+              <form onSubmit={onSubmitHandler}>
+                <TextField
+                  className={classes.comment}
+                  placeholder="Коментарии"
+                  value={comment}
+                  onChange={handleCommentChange}
+                />
+                <Button
+                  type="submit"
+                  className={classes.add}
+                  variant="contained"
+                  color="primary"
+                >
+                  Добавить
+                </Button>
+              </form>
               {item.comments.map((comment) => (
                 <Paper key={comment._id} className={classes.paper}>
                   <Grid container wrap="nowrap" spacing={2}>
