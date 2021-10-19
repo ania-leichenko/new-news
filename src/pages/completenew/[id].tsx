@@ -67,8 +67,8 @@ export default function Home() {
   let id = router.query.id;
   let [item, setItem] = useState<NewsItem>();
   let [comment, setComment] = useState("");
-  let currentPage = Number(router.query.page) || 1;
-  const [tags, setTags] = useState<string[]>([]);
+
+  const handleCommentChange = e => setComment(e.target.value);
 
   function clickHandler() {
     client
@@ -131,9 +131,8 @@ export default function Home() {
               <TextField
                 className={classes.comment}
                 placeholder="Коментарии"
-                onChange={function (e) {
-                  setComment(e.target.value);
-                }}
+                value={comment}
+                onChange={handleCommentChange}
                 onKeyPress={onKeyPressHandler}
               />
               <Button
