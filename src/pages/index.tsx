@@ -69,12 +69,12 @@ export default function Home() {
         <NewsComponent news={news} />
       </main>
       <footer>
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <Box m={1}>
             <h2>new-news</h2>
           </Box>
         </Grid>
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <Box m={1}>
             <Pagination
               defaultPage={currentPage}
