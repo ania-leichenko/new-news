@@ -15,7 +15,7 @@ export default function Filter({ filter, setFilter }: FilterProps) {
   }
 
   return (
-    <Grid container justify="center">
+    <Grid container justifyContent="center">
       <Box m={1}>
         <Button
           size="medium"
