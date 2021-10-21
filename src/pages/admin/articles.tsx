@@ -10,6 +10,7 @@ import Link from "@material-ui/core/Link";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import CardHeader from '@material-ui/core/CardHeader';
 
 const useStyles = makeStyles((theme) => ({
   hot: {
@@ -24,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+  content: {
+    textAlign: "right",
+  }
 }));
 
 export default function NewsItemComponent() {
@@ -52,10 +56,12 @@ export default function NewsItemComponent() {
       {news.map((item) => (
         <Card key={item.id} className={classes.hot}>
           <CardMedia className={classes.media} image={item.image} />
-          <CardContent>
+          <CardContent> 
             <Typography variant="body2" color="textSecondary" component="p">
               {item.title}
             </Typography>
+          </CardContent>
+          <CardContent className={classes.content}>
             <Link href={`/admin/edit-article?id=${item.id}`}>
               <IconButton aria-label="edit" className={classes.margin}>
                 <EditIcon />
