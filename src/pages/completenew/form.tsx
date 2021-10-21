@@ -3,8 +3,17 @@ import TextField from "@material-ui/core/TextField";
 import { client } from "@/api/axios";
 import Button from "@material-ui/core/Button";
 import { Input } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import { NoEncryption } from "@material-ui/icons";
+
+const useStyles = makeStyles(() => ({
+  input: {
+    marginBottom: "15px",
+  },
+}));
 
 export default function LayoutTextFields() {
+  const classes = useStyles();
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
   let [tags, setTags] = useState("");
@@ -90,7 +99,7 @@ export default function LayoutTextFields() {
         }}
         onKeyPress={onKeyPressHandler}
       />
-      <div>
+      <div className={classes.input}>
         <Input type="file" onChange={handleImgChange} />
       </div>
         <Button variant="contained" color="primary" onClick={clickHandler}>
