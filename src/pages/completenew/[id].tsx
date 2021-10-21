@@ -6,7 +6,6 @@ import { client } from "api/axios";
 import { NewsItem } from "@/types";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -45,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
   comment: {
     width: "500px",
+    height: "35px",
   },
   paper: {
     maxWidth: 1200,
@@ -144,20 +144,26 @@ export default function Home() {
             )}
             {session && (
               <form onSubmit={onSubmitHandler}>
-                <TextField
-                  className={classes.comment}
-                  placeholder="Коментарии"
-                  value={comment}
-                  onChange={handleCommentChange}
-                />
-                <Button
-                  type="submit"
-                  className={classes.add}
-                  variant="contained"
-                  color="primary"
-                >
-                  Добавить
-                </Button>
+                <Grid container justifyContent="center">
+                  <Grid item>
+                    <textarea
+                      className={classes.comment}
+                      placeholder="Коментарии"
+                      value={comment}
+                      onChange={handleCommentChange}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      type="submit"
+                      className={classes.add}
+                      variant="contained"
+                      color="primary"
+                    >
+                      Добавить
+                    </Button>
+                  </Grid>
+                </Grid>
               </form>
             )}
             {item.comments.map((comment) => (
