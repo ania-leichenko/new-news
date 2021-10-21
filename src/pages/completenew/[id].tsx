@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Typography } from "@material-ui/core";
 import SimilarNews from "@/components/SimilarNews";
+import { signIn, useSession } from "next-auth/client";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +60,15 @@ const useStyles = makeStyles((theme) => ({
   sobutia: {
     marginBottom: "30px",
   },
+  buttonPrimary: {
+    borderRadius: ".3rem",
+    lineHeight: "1.4rem",
+    padding: ".7rem 1.4rem",
+    backgroundColor: "#346df1",
+    color: "#fff",
+    textDecoration: "none",
+    marginLeft: "15px",
+  },
 }));
 
 export default function Home() {
@@ -67,6 +77,7 @@ export default function Home() {
   const id = router.query.id;
   const [item, setItem] = useState<NewsItem>();
   const [comment, setComment] = useState("");
+  const [session] = useSession();
 
   const handleCommentChange = (e) => setComment(e.target.value);
 
@@ -116,6 +127,22 @@ export default function Home() {
               <p>{item?.description}</p>
             </div>
             <div className={classes.stylesComment}>
+            {!session && (
+            <Grid container justifyContent="center">
+              <p>Хочешь оставить свой коментарий?Регистрируйся!</p>
+              <a
+                href={`/api/auth/signin`}
+                className={classes.buttonPrimary}
+                onClick={(e) => {
+                  e.preventDefault();
+                  signIn();
+                }}
+              >
+               Зарегистрироваться
+              </a>
+            </Grid>
+            )}
+            {session && (
               <form onSubmit={onSubmitHandler}>
                 <TextField
                   className={classes.comment}
@@ -132,19 +159,20 @@ export default function Home() {
                   Добавить
                 </Button>
               </form>
-              {item.comments.map((comment) => (
-                <Paper key={comment._id} className={classes.paper}>
-                  <Grid container wrap="nowrap" spacing={2}>
-                    <Grid item>
-                      <Avatar alt="avatar" src={comment.userImage}></Avatar>
-                    </Grid>
-                    <Grid item xs zeroMinWidth>
-                      <Typography noWrap>{comment.userEmail}</Typography>
-                      <Typography noWrap>{comment.value}</Typography>
-                    </Grid>
+            )}
+            {item.comments.map((comment) => (
+              <Paper key={comment._id} className={classes.paper}>
+                <Grid container wrap="nowrap" spacing={2}>
+                  <Grid item>
+                    <Avatar alt="avatar" src={comment.userImage}></Avatar>
                   </Grid>
-                </Paper>
-              ))}
+                  <Grid item xs zeroMinWidth>
+                    <Typography noWrap>{comment.userEmail}</Typography>
+                    <Typography noWrap>{comment.value}</Typography>
+                  </Grid>
+              </Grid>
+            </Paper>
+           ))}
             </div>
             <footer className={classes.footer}>
               <SimilarNews id={item._id} />

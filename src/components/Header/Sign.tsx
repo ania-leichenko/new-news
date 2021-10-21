@@ -108,9 +108,6 @@ export default function Sign() {
         >
           {!session && (
             <>
-              <span className={classes.notSignedInText}>
-                You are not signed in
-              </span>
               <a
                 href={`/api/auth/signin`}
                 className={classes.buttonPrimary}
