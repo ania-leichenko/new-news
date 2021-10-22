@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import Head from "next/head";
-import Header from "@/components/Header/Header";
 import { useRouter } from "next/router";
 import { client } from "api/axios";
 import { NewsItem } from "@/types";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { Typography } from "@material-ui/core";
-import SimilarNews from "@/components/SimilarNews";
 import { signIn, useSession } from "next-auth/client";
+import Head from "next/head";
+import Header from "@/components/Header/Header";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import Avatar from "@material-ui/core/Avatar";
+import Typography from "@material-ui/core/Typography";
+import SimilarNews from "@/components/SimilarNews";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,19 +21,25 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     marginTop: "30px",
   },
+  sobutia: {
+    marginBottom: "30px",
+  },
+  line: {
+    borderBottom: "5px solid #0000FF",
+  },
   main: {
     marginTop: "40px",
-  },
-  footer: {
-    marginTop: "80px",
     textAlign: "center",
+  },
+  image: {
+    maxWidth: 800,
   },
   description: {
     fontSize: "20px",
-    maxWidth: 1200,
-    isplay: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
+  },
+  comment: {
+    width: "500px",
+    height: "35px",
   },
   stylesComment: {
     textAlign: "center",
@@ -41,24 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
   add: {
     marginLeft: "8px",
-  },
-  comment: {
-    width: "500px",
-    height: "35px",
-  },
-  paper: {
-    maxWidth: 1200,
-    margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(2),
-  },
-  image: {
-    maxWidth: 800,
-  },
-  line: {
-    borderBottom: "5px solid #0000FF",
-  },
-  sobutia: {
-    marginBottom: "30px",
   },
   buttonPrimary: {
     borderRadius: ".3rem",
@@ -68,6 +56,15 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     textDecoration: "none",
     marginLeft: "15px",
+  },
+  paper: {
+    maxWidth: 1200,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
+  },
+  footer: {
+    marginTop: "80px",
+    textAlign: "center",
   },
 }));
 
@@ -113,7 +110,7 @@ export default function Home() {
       <Header />
       {item ? (
         <div className={classes.root}>
-          <main className={classes.main}>
+          <main>
             <div>
               <Grid className={classes.sobutia}>
                 <div className={classes.line}>

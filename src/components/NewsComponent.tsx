@@ -1,18 +1,14 @@
-import NewsItemComponent from "./NewsItemComponent";
-import Grid from "@material-ui/core/Grid";
-import { FC } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Link from 'next/link';
+import { FC } from "react";
 import { NewsItem } from "@/types";
+import Grid from "@material-ui/core/Grid";
+import Link from "next/link";
+import NewsItemComponent from "./NewsItemComponent";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary,
   },
   links: {
     outline: "none",
@@ -28,7 +24,7 @@ export const NewsComponent: FC<NewsItemComponentProps> = ({ news }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <Grid container>
         {news.map((item) => (
           <Grid key={item.id} item xs={4} className={classes.paper}>
