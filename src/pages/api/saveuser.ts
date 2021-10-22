@@ -5,7 +5,7 @@ import { getSession } from "next-auth/client";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
   if (session === null) {
-    res.status(401).json({ error: "Unauthorized" });
+    res.status(401).json({ error: "error" });
     return;
   }
 

@@ -10,7 +10,6 @@ export const config = {
   },
 }
 
-
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
   if (session === null) {

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import Head from "next/head";
-import Header from "../components/Header/Header";
-import { NewsComponent } from "components/NewsComponent";
-import Filter from "components/Filter";
 import { makeStyles } from "@material-ui/styles";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import { useRouter } from "next/router";
 import { useNewsList } from "@/services/news-list";
-import { Pagination } from "@material-ui/lab";
+import Head from "next/head";
+import Header from "../components/Header/Header";
+import Grid from "@material-ui/core/Grid";
+import Filter from "components/Filter";
+import { NewsComponent } from "components/NewsComponent";
+import Box from "@material-ui/core/Box";
+import Pagination from "@material-ui/lab/Pagination";
 
 
 const useStyles = makeStyles(() => ({

@@ -8,20 +8,22 @@ import Button from "@material-ui/core/Button"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    textAlign: "center",
     justifyContent: "center",
-    margin: theme.spacing(1), 
   },
   main: {
     textAlign: "center",
   },
-  description: {
-    fontSize: "20px",
-    width: 800,
-    margin: 50,
+  image: {
+    width: "800px",
+    marginBottom: "15px",
   },
   title: {
     width: 800,
+  },
+  description: {
+    width: 600,
+    height: 70,
+    margin: 50,
   },
   button: {
     marginTop: "15px",
@@ -67,23 +69,23 @@ export default function Home() {
     <div className={classes.root}>
       {item ? (
         <main className={classes.main}>
-          <img src={item.image} />
+          <img src={item.image} className={classes.image}/>
           <div>
             <TextField 
-                defaultValue={item.title} 
-                className={classes.title}
-                onChange={(e) => {
-                  changeTitle(e.target.value);
-                }}>
+              defaultValue={item.title} 
+              className={classes.title}
+              onChange={(e) => {
+                changeTitle(e.target.value);
+              }}>
             </TextField> 
           </div>
           <div>
-           <TextField defaultValue={item.description} 
+           <textarea defaultValue={item.description} 
            className={classes.description}
            onChange={(e) => {
             changeDescription(e.target.value);
            }}>
-           </TextField>
+           </textarea>
          </div>
          <footer>
             <Button

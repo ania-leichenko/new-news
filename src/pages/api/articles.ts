@@ -9,8 +9,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   if (id) {
     result = result.filter((item) => item._id !== id);
   }
-
   result = result.map((item) => ({ ...item, id: item._id }));
+  
   if (tags.length) {
     result = result.filter((article) =>
       article.tags.some((tag) => tags.includes(tag))
