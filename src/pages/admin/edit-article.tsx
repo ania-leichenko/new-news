@@ -4,9 +4,9 @@ import { NewsItem } from "@/types";
 import { makeStyles } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
 import { TextField } from "@material-ui/core";
-import Button from "@material-ui/core/Button"
+import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     justifyContent: "center",
   },
@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => ({
     width: 800,
   },
   description: {
-    width: 600,
-    height: 70,
+    width: 800,
+    height: 90,
     margin: 50,
   },
   button: {
@@ -75,25 +75,25 @@ export default function Home() {
               defaultValue={item.title} 
               className={classes.title}
               onChange={(e) => {
-                changeTitle(e.target.value);
+              changeTitle(e.target.value);
               }}>
             </TextField> 
           </div>
           <div>
-           <textarea defaultValue={item.description} 
-           className={classes.description}
-           onChange={(e) => {
-            changeDescription(e.target.value);
-           }}>
-           </textarea>
-         </div>
-         <footer>
+            <textarea defaultValue={item.description} 
+            className={classes.description}
+            onChange={(e) => {
+              changeDescription(e.target.value);
+            }}>
+            </textarea>
+          </div>
+          <footer>
             <Button
-            className={classes.button}
-            color="primary"
-            onClick={clickHandler}
+              className={classes.button}
+              color="primary"
+              onClick={clickHandler}
             >Save</Button>
-         </footer>
+          </footer>
         </main>
       ) : (
         <main className={classes.main}>Новость не найдена</main>
