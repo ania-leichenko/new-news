@@ -27,7 +27,7 @@ export const NewsComponent: FC<NewsItemComponentProps> = ({ news }) => {
     <div>
       <Grid container>
         {news.map((item) => (
-          <Grid key={item.id} item xs={4} className={classes.paper}>
+          <Grid key={item.id} item xs={12} sm={6} md={4} className={classes.paper}>
             <Link href={`/completenew/${item.id}`} >
               <a className={classes.links}>
                 <NewsItemComponent item={item} />

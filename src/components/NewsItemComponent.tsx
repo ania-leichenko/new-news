@@ -25,7 +25,7 @@ export default function NewsItemComponent({ item }: NewsItemComponentProps) {
   const classes = useStyles();
 
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center">
+    <Grid container justifyContent="center" >
       <Card className={classes.root}>
         <CardMedia className={classes.media} image={item.image} />
         <CardContent>
