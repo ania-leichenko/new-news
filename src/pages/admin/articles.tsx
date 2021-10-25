@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { NewsItem } from "../../types/newsItem";
 import { client } from "api/axios";
 import { useRouter } from "next/router";
 import { useNewsList } from "@/services/news-list";
@@ -46,20 +45,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NewsItemComponent() {
   const classes = useStyles();
-  const [news, setNews] = useState<NewsItem[]>([]);
   const router = useRouter();
   let currentPage = Number(router.query.page) || 1;
   const [tags, setTags] = useState<string[]>([]);
-  const { pagesCount } = useNewsList(tags, currentPage);
-
-  useEffect(() => {
-    client
-      .get("/api/articles", {})
-      .then((result) => {
-        setNews(result.data.items);
-      })
-      .catch(() => {});
-  }, []);
+  const { pagesCount,  news } = useNewsList(tags, currentPage);
 
   function handleClick(id) {
     client
@@ -69,8 +58,8 @@ export default function NewsItemComponent() {
       .catch(() => {});
   }
 
-  function clickHeadler (event, page)  {
-    router.push(`/?page=${page}`);
+  function clickHeadler(event, page) {
+    router.push(`/admin/articles/?page=${page}`);
   }
 
   return (
@@ -78,33 +67,37 @@ export default function NewsItemComponent() {
       <Grid container justifyContent="center" className={classes.root}>
         {news.map((item) => (
           <main key={item.id}>
-            <Grid item xs={12} sm={6}>
+            <Grid item sm={6}>
               <Card className={classes.card}>
-                 <CardMedia className={classes.media} image={item.image} />
-                  <CardContent> 
-                    <Typography variant="body2" color="textSecondary" component="p">
-                      {item.title}
-                    </Typography>
-                  </CardContent>
-                  <CardContent className={classes.content}>
-                    <Link href={`/admin/edit-article?id=${item.id}`}>
-                      <IconButton aria-label="edit" className={classes.margin}>
-                        <EditIcon />
-                      </IconButton>
-                    </Link>
-                    <IconButton
-                      aria-label="delete"
-                      className={classes.margin}
-                      onClick={() => handleClick(item.id)}
-                    >
-                      <DeleteIcon />
+                <CardMedia className={classes.media} image={item.image} />
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {item.title}
+                  </Typography>
+                </CardContent>
+                <CardContent className={classes.content}>
+                  <Link href={`/admin/edit-article?id=${item.id}`}>
+                    <IconButton aria-label="edit" className={classes.margin}>
+                      <EditIcon />
                     </IconButton>
-                  </CardContent>
-                </Card>
-             </Grid>
+                  </Link>
+                  <IconButton
+                    aria-label="delete"
+                    className={classes.margin}
+                    onClick={() => handleClick(item.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </CardContent>
+              </Card>
+            </Grid>
           </main>
-       ))}
-       </Grid>
+        ))}
+      </Grid>
       <footer className={classes.footer}>
         <Grid container justifyContent="center">
           <Box m={1}>

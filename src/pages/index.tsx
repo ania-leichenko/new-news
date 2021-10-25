@@ -10,7 +10,6 @@ import { NewsComponent } from "components/NewsComponent";
 import Box from "@material-ui/core/Box";
 import Pagination from "@material-ui/lab/Pagination";
 
-
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 1000,
