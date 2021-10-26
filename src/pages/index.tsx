@@ -27,14 +27,14 @@ const useStyles = makeStyles(() => ({
   },
   novosti: {
     marginBottom: "30px",
-  }
+  },
 }));
 
 export default function Home() {
   const classes = useStyles();
   const router = useRouter();
   let currentPage = Number(router.query.page) || 1;
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState(router.query.tags || "all");
   const [tags, setTags] = useState<string[]>([]);
   const { news, pagesCount } = useNewsList(tags, currentPage);
 
@@ -46,7 +46,7 @@ export default function Home() {
   }, [filter]);
 
   function handleClick(event, page) {
-    router.push(`/?page=${page}`);
+    router.push(`/?tags=${tags}&page=${page}`);
   }
 
   return (

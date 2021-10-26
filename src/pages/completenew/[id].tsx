@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import SimilarNews from "@/components/SimilarNews";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,13 +33,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   image: {
-    maxWidth: 800,
+    width: "100%",
   },
   description: {
     fontSize: "20px",
+    textAlign: "center",
   },
   comment: {
-    width: "500px",
+    width: "100%",
     height: "35px",
   },
   stylesComment: {
@@ -118,64 +120,66 @@ export default function Home() {
                 </div>
               </Grid>
             </div>
-            <img className={classes.image} src={item?.image} />
+            <Grid container justifyContent="center">
+              <img src={item?.image} className={classes.image} />
+            </Grid>
             <h1>{item?.title}</h1>
             <div className={classes.description}>
               <p>{item?.description}</p>
             </div>
             <div className={classes.stylesComment}>
-            {!session && (
-            <Grid container justifyContent="center">
-              <p>Хочешь оставить свой коментарий?Регистрируйся!</p>
-              <a
-                href={`/api/auth/signin`}
-                className={classes.buttonPrimary}
-                onClick={(e) => {
-                  e.preventDefault();
-                  signIn();
-                }}
-              >
-               Зарегистрироваться
-              </a>
-            </Grid>
-            )}
-            {session && (
-              <form onSubmit={onSubmitHandler}>
+              {!session && (
                 <Grid container justifyContent="center">
-                  <Grid item>
-                    <textarea
-                      className={classes.comment}
-                      placeholder="Коментарии"
-                      value={comment}
-                      onChange={handleCommentChange}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      type="submit"
-                      className={classes.add}
-                      variant="contained"
-                      color="primary"
-                    >
-                      Добавить
-                    </Button>
-                  </Grid>
+                  <p>Хочешь оставить свой коментарий?Регистрируйся!</p>
+                  <a
+                    href={`/api/auth/signin`}
+                    className={classes.buttonPrimary}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      signIn();
+                    }}
+                  >
+                    Зарегистрироваться
+                  </a>
                 </Grid>
-              </form>
-            )}
-            {item.comments.map((comment) => (
-              <Paper key={comment._id} className={classes.paper}>
-                <Grid container wrap="nowrap" spacing={2}>
-                  <Grid item>
-                    <Avatar alt="avatar" src={comment.userImage}></Avatar>
+              )}
+              {session && (
+                <form onSubmit={onSubmitHandler}>
+                  <Grid container justifyContent="center">
+                    <Grid item xs={12} sm={9}>
+                      <textarea
+                        className={classes.comment}
+                        placeholder="Коментарии"
+                        value={comment}
+                        onChange={handleCommentChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <Button
+                        type="submit"
+                        className={classes.add}
+                        variant="contained"
+                        color="primary"
+                      >
+                        Добавить
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item xs zeroMinWidth>
-                    <Typography noWrap>{comment.userEmail}</Typography>
-                    <Typography noWrap>{comment.value}</Typography>
+                </form>
+              )}
+              {item.comments.map((comment) => (
+                <Paper key={comment._id} className={classes.paper}>
+                  <Grid container wrap="nowrap" spacing={2}>
+                    <Grid item>
+                      <Avatar alt="avatar" src={comment.userImage}></Avatar>
+                    </Grid>
+                    <Grid item xs zeroMinWidth>
+                      <Typography noWrap>{comment.userEmail}</Typography>
+                      <Typography noWrap>{comment.value}</Typography>
+                    </Grid>
                   </Grid>
-              </Grid>
-            </Paper>
-           ))}
+                </Paper>
+              ))}
             </div>
             <footer className={classes.footer}>
               <SimilarNews id={item._id} />
