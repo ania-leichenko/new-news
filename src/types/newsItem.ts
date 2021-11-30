@@ -8,7 +8,7 @@ export interface Comment {
 
 
 export interface NewsItem {
-  private _id: any;
+  _id: any;
   id: string;
   title: string;
   description: string;
